@@ -1,0 +1,25 @@
+# Xcode
+DerivedData/
+build/
+*.xcworkspace/xcuserdata/
+*.xcodeproj/xcuserdata/
+*.xcuserstate
+*.xcscmblueprint
+*.xccheckout
+
+# XcodeGen output
+PullPathAR.xcodeproj/
+
+# macOS
+.DS_Store
+
+# Local secrets / signing
+.env
+*.p12
+*.mobileprovision
+AuthKey_*.p8
+
+# Generated exports
+artifacts/
+*.ipa
+*.xcarchive/
