@@ -79,47 +79,47 @@ enum PullSheetPDFService {
             }
 
             startPage()
-            drawText("PullPath AR — Pull Sheet", font: .boldSystemFont(ofSize: 22), height: 32)
+            drawText(String(localized: "pdf.title"), font: .boldSystemFont(ofSize: 22), height: 32)
             drawText(snapshot.projectName, font: .boldSystemFont(ofSize: 16), height: 24)
-            drawText("Route: \(snapshot.routeName)", font: .systemFont(ofSize: 13))
+            drawText("\(String(localized: "pdf.route")): \(snapshot.routeName)", font: .systemFont(ofSize: 13))
 
             if !snapshot.clientName.isEmpty {
-                drawText("Client: \(snapshot.clientName)", font: .systemFont(ofSize: 11))
+                drawText("\(String(localized: "pdf.client")): \(snapshot.clientName)", font: .systemFont(ofSize: 11))
             }
             if !snapshot.siteName.isEmpty {
-                drawText("Site: \(snapshot.siteName)", font: .systemFont(ofSize: 11))
+                drawText("\(String(localized: "pdf.site")): \(snapshot.siteName)", font: .systemFont(ofSize: 11))
             }
 
             drawRule()
-            drawText("Cable: \(snapshot.cableProfileName)", font: .systemFont(ofSize: 12))
-            drawText("Status: \(snapshot.routeStatus)", font: .systemFont(ofSize: 12))
+            drawText("\(String(localized: "pdf.cable")): \(snapshot.cableProfileName)", font: .systemFont(ofSize: 12))
+            drawText("\(String(localized: "pdf.status")): \(snapshot.routeStatus)", font: .systemFont(ofSize: 12))
             drawText(
-                "Measured: \(RouteMath.formattedLength(meters: snapshot.baseLengthMeters, unitSystem: unitSystem))",
+                "\(String(localized: "pdf.measured")): \(RouteMath.formattedLength(meters: snapshot.baseLengthMeters, unitSystem: unitSystem))",
                 font: .systemFont(ofSize: 12)
             )
             drawText(
-                "Slack: \(RouteMath.formattedLength(meters: snapshot.fixedSlackMeters, unitSystem: unitSystem)) + \(String(format: "%.1f", snapshot.slackPercent))%",
+                "\(String(localized: "pdf.slack")): \(RouteMath.formattedLength(meters: snapshot.fixedSlackMeters, unitSystem: unitSystem)) + \(String(format: "%.1f", snapshot.slackPercent))%",
                 font: .systemFont(ofSize: 12)
             )
             drawText(
-                "Required: \(RouteMath.formattedLength(meters: snapshot.requiredLengthMeters, unitSystem: unitSystem))",
+                "\(String(localized: "pdf.required")): \(RouteMath.formattedLength(meters: snapshot.requiredLengthMeters, unitSystem: unitSystem))",
                 font: .boldSystemFont(ofSize: 14),
                 height: 28
             )
 
             if !snapshot.reelName.isEmpty {
-                var reelLine = "Assigned reel: \(snapshot.reelName)"
+                var reelLine = "\(String(localized: "pdf.assignedReel")): \(snapshot.reelName)"
                 if let remaining = snapshot.reelRemainingMeters {
-                    reelLine += " • Remaining after pull: \(RouteMath.formattedLength(meters: remaining, unitSystem: unitSystem))"
+                    reelLine += " • \(String(localized: "pdf.remainingAfterPull")): \(RouteMath.formattedLength(meters: remaining, unitSystem: unitSystem))"
                 }
                 drawText(reelLine, font: .systemFont(ofSize: 12), height: 30)
             }
 
             drawRule()
-            drawText("Segment ledger", font: .boldSystemFont(ofSize: 15), height: 28)
+            drawText(String(localized: "pdf.segmentLedger"), font: .boldSystemFont(ofSize: 15), height: 28)
 
             if snapshot.segments.isEmpty {
-                drawText("No measured segments.", font: .italicSystemFont(ofSize: 11), color: .secondaryLabel)
+                drawText(String(localized: "pdf.noSegments"), font: .italicSystemFont(ofSize: 11), color: .secondaryLabel)
             } else {
                 for segment in snapshot.segments {
                     let from = segment.fromLabel.isEmpty ? "P\(segment.index)" : segment.fromLabel
@@ -131,7 +131,7 @@ enum PullSheetPDFService {
 
             if !snapshot.notes.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                 drawRule()
-                drawText("Notes", font: .boldSystemFont(ofSize: 15), height: 28)
+                drawText(String(localized: "pdf.notes"), font: .boldSystemFont(ofSize: 15), height: 28)
                 let noteHeight = max(CGFloat(48), CGFloat(snapshot.notes.count / 70 + 1) * 18)
                 drawText(snapshot.notes, font: .systemFont(ofSize: 11), height: noteHeight)
             }
@@ -139,7 +139,7 @@ enum PullSheetPDFService {
             drawRule()
             let dateText = snapshot.generatedAt.formatted(date: .abbreviated, time: .shortened)
             drawText(
-                "Generated \(dateText) • AR measurements are planning aids and can be manually verified or corrected.",
+                "\(String(localized: "pdf.generated")) \(dateText) • \(String(localized: "pdf.disclaimer"))",
                 font: .systemFont(ofSize: 8.5),
                 color: .secondaryLabel,
                 height: 32

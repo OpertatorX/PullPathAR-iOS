@@ -10,7 +10,8 @@ struct PullPathARApp: App {
             RoutePoint.self,
             CableProfile.self,
             CableReel.self,
-            PhotoNote.self
+            PhotoNote.self,
+            HistoryEntry.self
         ])
         let configuration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 

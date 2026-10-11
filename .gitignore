@@ -23,3 +23,6 @@ AuthKey_*.p8
 artifacts/
 *.ipa
 *.xcarchive/
+
+# Temporary local static-audit dependencies
+.audit-packages/
