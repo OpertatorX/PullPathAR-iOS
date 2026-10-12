@@ -1,0 +1,107 @@
+name: Store Screenshots
+
+on:
+  workflow_dispatch:
+
+jobs:
+  capture:
+    runs-on: macos-latest
+    timeout-minutes: 40
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install XcodeGen
+        run: brew install xcodegen
+
+      - name: Generate project
+        run: xcodegen generate
+
+      - name: Select simulator types
+        shell: bash
+        run: |
+          set -euo pipefail
+          RUNTIME=$(xcrun simctl list runtimes -j | python3 -c 'import json,sys,re; d=json.load(sys.stdin); r=[x for x in d["runtimes"] if x.get("isAvailable") and "iOS" in x.get("name","")]; r.sort(key=lambda x: tuple(map(int,re.findall(r"\d+",x.get("version","0")))), reverse=True); print(r[0]["identifier"] if r else "")')
+          test -n "$RUNTIME"
+          TYPES_JSON=$(xcrun simctl list devicetypes -j)
+          IPHONE_TYPE=$(printf '%s' "$TYPES_JSON" | python3 -c 'import json,sys; a=json.load(sys.stdin)["devicetypes"]; prefs=["iPhone 16 Pro","iPhone 15 Pro Max","iPhone 16 Pro Max"]; pick=next((x for n in prefs for x in a if x["name"]==n),None) or next((x for x in a if x["name"].startswith("iPhone")),None); print(pick["identifier"] if pick else "")')
+          IPAD_TYPE=$(printf '%s' "$TYPES_JSON" | python3 -c 'import json,sys; a=json.load(sys.stdin)["devicetypes"]; prefs=["iPad Pro 13-inch (M4)","iPad Pro 13-inch (M5)","iPad Pro (12.9-inch) (6th generation)"]; pick=next((x for n in prefs for x in a if x["name"]==n),None) or next((x for x in a if "iPad Pro" in x["name"]),None); print(pick["identifier"] if pick else "")')
+          test -n "$IPHONE_TYPE" && test -n "$IPAD_TYPE"
+          IPHONE_UDID=$(xcrun simctl create PullPath-iPhone "$IPHONE_TYPE" "$RUNTIME")
+          IPAD_UDID=$(xcrun simctl create PullPath-iPad "$IPAD_TYPE" "$RUNTIME")
+          echo "RUNTIME=$RUNTIME" >> "$GITHUB_ENV"
+          echo "IPHONE_UDID=$IPHONE_UDID" >> "$GITHUB_ENV"
+          echo "IPAD_UDID=$IPAD_UDID" >> "$GITHUB_ENV"
+          echo "iPhone: $IPHONE_TYPE $IPHONE_UDID"
+          echo "iPad: $IPAD_TYPE $IPAD_UDID"
+
+      - name: Boot iPhone and build app
+        shell: bash
+        run: |
+          set -euo pipefail
+          xcrun simctl boot "$IPHONE_UDID"
+          xcrun simctl bootstatus "$IPHONE_UDID" -b
+          xcodebuild \
+            -project PullPathAR.xcodeproj \
+            -scheme PullPathAR \
+            -configuration Debug \
+            -destination "platform=iOS Simulator,id=$IPHONE_UDID" \
+            -derivedDataPath "$PWD/DerivedData" \
+            CODE_SIGNING_ALLOWED=NO \
+            build
+          APP=$(find "$PWD/DerivedData/Build/Products/Debug-iphonesimulator" -maxdepth 1 -name 'PullPathAR.app' -print -quit)
+          test -d "$APP"
+          echo "APP_PATH=$APP" >> "$GITHUB_ENV"
+
+      - name: Capture localized screenshots
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts/screenshots/raw
+
+          capture_set() {
+            local udid="$1"
+            local device="$2"
+            xcrun simctl boot "$udid" 2>/dev/null || true
+            xcrun simctl bootstatus "$udid" -b
+            xcrun simctl install "$udid" "$APP_PATH"
+            xcrun simctl status_bar "$udid" override --time '9:41' --batteryState charged --batteryLevel 100 --wifiBars 3 --cellularBars 4 2>/dev/null || true
+
+            for locale in en-US fr-FR; do
+              if [ "$locale" = "fr-FR" ]; then
+                lang='fr'; appleLocale='fr_FR'
+              else
+                lang='en'; appleLocale='en_US'
+              fi
+              outdir="artifacts/screenshots/raw/$locale/$device"
+              mkdir -p "$outdir"
+              i=1
+              for mode in projects route reels routes editor; do
+                xcrun simctl launch --terminate-running-process "$udid" com.operatorx.pullpathar "--screenshot=$mode" -AppleLanguages "($lang)" -AppleLocale "$appleLocale"
+                sleep 4
+                printf -v num '%02d' "$i"
+                xcrun simctl io "$udid" screenshot "$outdir/$num-$mode.png"
+                i=$((i+1))
+              done
+            done
+            xcrun simctl shutdown "$udid" || true
+          }
+
+          capture_set "$IPHONE_UDID" iphone
+          capture_set "$IPAD_UDID" ipad
+
+      - name: Report screenshot sizes
+        shell: bash
+        run: |
+          set -euo pipefail
+          while IFS= read -r -d '' p; do
+            echo "$p"
+            sips -g pixelWidth -g pixelHeight "$p" | tail -n 2
+          done < <(find artifacts/screenshots/raw -name '*.png' -print0 | sort -z)
+
+      - name: Upload screenshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: pullpath-store-screenshots-raw
+          path: artifacts/screenshots/raw/**/*.png
+          retention-days: 14

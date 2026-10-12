@@ -2,6 +2,18 @@ import SwiftUI
 
 struct RootView: View {
     var body: some View {
+#if DEBUG
+        if let mode = StoreScreenshotMode.current {
+            StoreScreenshotRoot(mode: mode)
+        } else {
+            mainTabs
+        }
+#else
+        mainTabs
+#endif
+    }
+
+    private var mainTabs: some View {
         TabView {
             ProjectsView()
                 .tabItem { Label("tab.projects", systemImage: "folder") }
