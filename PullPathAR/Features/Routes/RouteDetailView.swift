@@ -59,6 +59,14 @@ struct RouteDetailView: View {
         )
     }
 
+    private var hasARGeometry: Bool {
+        routePoints.count > 1 && routePoints.contains { $0.source == .augmentedReality }
+    }
+
+    private var geometry: RouteGeometrySummary {
+        RouteMath.geometrySummary(points: RouteMath.vectors(from: routePoints))
+    }
+
     var body: some View {
         List {
             Section {
@@ -93,6 +101,27 @@ struct RouteDetailView: View {
                     RouteEditorView(route: route)
                 } label: {
                     Label("route.editor.title", systemImage: "slider.horizontal.3")
+                }
+            }
+
+            if hasARGeometry {
+                Section("route.geometry.section") {
+                    LabeledContent(
+                        "route.geometry.horizontal",
+                        value: RouteMath.formattedLength(meters: geometry.horizontalTravelMeters, unitSystem: route.unitSystem)
+                    )
+                    LabeledContent(
+                        "route.geometry.vertical",
+                        value: RouteMath.formattedLength(meters: geometry.verticalTravelMeters, unitSystem: route.unitSystem)
+                    )
+                    LabeledContent(
+                        "route.geometry.elevation",
+                        value: RouteMath.formattedLength(meters: geometry.elevationRangeMeters, unitSystem: route.unitSystem)
+                    )
+                    LabeledContent(
+                        "route.geometry.direct",
+                        value: RouteMath.formattedLength(meters: geometry.straightLineMeters, unitSystem: route.unitSystem)
+                    )
                 }
             }
 

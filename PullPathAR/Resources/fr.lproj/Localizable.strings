@@ -128,6 +128,12 @@
 "route.measure.ar" = "Tracer en AR";
 "route.measure.ar.unavailable" = "Non pris en charge sur cet appareil";
 "route.measure.manual" = "Saisir les mesures manuellement";
+
+"route.geometry.section" = "Profil 3D du tracé";
+"route.geometry.horizontal" = "Déplacement horizontal";
+"route.geometry.vertical" = "Déplacement vertical";
+"route.geometry.elevation" = "Amplitude d’altitude";
+"route.geometry.direct" = "Distance directe entre extrémités";
 "route.material.section" = "Câble et bobine";
 "route.reel" = "Bobine attribuée";
 "route.reel.none" = "Non attribuée";

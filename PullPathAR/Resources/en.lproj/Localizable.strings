@@ -128,6 +128,12 @@
 "route.measure.ar" = "Trace with AR";
 "route.measure.ar.unavailable" = "Not supported on this device";
 "route.measure.manual" = "Enter Measurements Manually";
+
+"route.geometry.section" = "3D route profile";
+"route.geometry.horizontal" = "Horizontal travel";
+"route.geometry.vertical" = "Vertical travel";
+"route.geometry.elevation" = "Elevation range";
+"route.geometry.direct" = "Direct endpoint distance";
 "route.material.section" = "Cable & reel";
 "route.reel" = "Assigned reel";
 "route.reel.none" = "Not assigned";

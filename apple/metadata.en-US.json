@@ -1,0 +1,19 @@
+{
+  "bundleId": "com.operatorx.pullpathar",
+  "version": "1.0.0",
+  "buildNumber": "1",
+  "locale": "en-US",
+  "name": "PullPath AR",
+  "subtitle": "Cable Route & Reel Planner",
+  "promotionalText": "Trace real cable paths in AR, add slack, check reel capacity and export a field-ready pull sheet.",
+  "description": "PullPath AR is a field tool for installers who need to turn a physical cable path into a documented, material-aware route.\n\nTrace a run point by point with ARKit, or use the manual workflow when AR is not suitable. PullPath AR calculates the measured path, applies fixed slack and percentage allowance, and shows the total cable requirement before the pull.\n\nCreate cable profiles and track active reels with their remaining length. Assign a reel to a route and immediately see whether it can cover the required cable length.\n\nDocument each route with site photos, editable route points, notes, status and history. When the route is ready, export a PDF pull sheet containing project information, segment lengths, slack, total requirement and reel details.\n\nKey features:\n• AR cable-route capture with visible 3D points and segments\n• 3D route profile with horizontal travel, vertical travel, elevation range and endpoint distance\n• Manual route measurement when AR is unavailable or inappropriate\n• Fixed slack and percentage allowance\n• Cable profiles and reel inventory\n• Reel fit / shortage check before the pull\n• Project, site and client organization\n• Route status and local activity history\n• Site photo documentation\n• PDF pull-sheet export\n• Metric and imperial units\n• Local storage with no required account\n• No ads and no third-party analytics\n\nMeasurements are planning estimates. Verify dimensions and site conditions using the methods required by your trade before ordering, cutting or installing material.",
+  "keywords": "cable,route,AR,installer,reel,slack,pull,network,field,measurement",
+  "marketingUrl": "https://operatorx-pullpath-ar.vercel.app/",
+  "supportUrl": "https://operatorx-pullpath-ar.vercel.app/support",
+  "privacyPolicyUrl": "https://operatorx-pullpath-ar.vercel.app/privacy",
+  "termsUrl": "https://operatorx-pullpath-ar.vercel.app/terms",
+  "primaryCategory": "UTILITIES",
+  "secondaryCategory": "PRODUCTIVITY",
+  "priceTargetEUR": 9.99,
+  "pricingModel": "paid-upfront-no-iap-no-ads"
+}

@@ -26,3 +26,7 @@ artifacts/
 
 # Temporary local static-audit dependencies
 .audit-packages/
+
+# Vercel local project link
+.vercel/
+site/.vercel/

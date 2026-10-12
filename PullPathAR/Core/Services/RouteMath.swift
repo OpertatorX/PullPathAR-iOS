@@ -18,6 +18,13 @@ struct ReelAssessment: Equatable, Sendable {
     let shortageMeters: Double
 }
 
+struct RouteGeometrySummary: Equatable, Sendable {
+    let horizontalTravelMeters: Double
+    let verticalTravelMeters: Double
+    let elevationRangeMeters: Double
+    let straightLineMeters: Double
+}
+
 enum RouteMath {
     static let feetPerMeter = 3.280_839_895
 
@@ -77,6 +84,35 @@ enum RouteMath {
             fits: delta >= 0,
             remainingMeters: max(0, delta),
             shortageMeters: max(0, -delta)
+        )
+    }
+
+    static func geometrySummary(points: [RouteVector3]) -> RouteGeometrySummary {
+        guard let first = points.first, let last = points.last, points.count > 1 else {
+            return RouteGeometrySummary(
+                horizontalTravelMeters: 0,
+                verticalTravelMeters: 0,
+                elevationRangeMeters: 0,
+                straightLineMeters: 0
+            )
+        }
+
+        var horizontal = 0.0
+        var vertical = 0.0
+        for (a, b) in zip(points, points.dropFirst()) {
+            let dx = b.x - a.x
+            let dz = b.z - a.z
+            horizontal += (dx * dx + dz * dz).squareRoot()
+            vertical += abs(b.y - a.y)
+        }
+
+        let elevations = points.map(\.y)
+        let range = (elevations.max() ?? 0) - (elevations.min() ?? 0)
+        return RouteGeometrySummary(
+            horizontalTravelMeters: horizontal,
+            verticalTravelMeters: vertical,
+            elevationRangeMeters: max(0, range),
+            straightLineMeters: distance(from: first, to: last)
         )
     }
 

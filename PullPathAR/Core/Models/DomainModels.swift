@@ -27,7 +27,7 @@ enum UnitSystem: String, CaseIterable, Codable, Identifiable {
     var id: String { rawValue }
 }
 
-enum RoutePointSource: String, Codable {
+enum RoutePointSource: String, Codable, Equatable {
     case augmentedReality
     case manual
 }

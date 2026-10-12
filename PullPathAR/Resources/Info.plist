@@ -22,6 +22,8 @@
     <string>$(CURRENT_PROJECT_VERSION)</string>
     <key>LSRequiresIPhoneOS</key>
     <true/>
+    <key>ITSAppUsesNonExemptEncryption</key>
+    <false/>
     <key>NSCameraUsageDescription</key>
     <string>PullPath AR uses the camera to place route points in augmented reality and document cable paths.</string>
     <key>NSPhotoLibraryUsageDescription</key>

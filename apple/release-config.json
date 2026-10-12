@@ -1,0 +1,28 @@
+{
+  "product": "PullPath AR",
+  "bundleId": "com.operatorx.pullpathar",
+  "version": "1.0.0",
+  "buildNumber": "1",
+  "platform": "IOS",
+  "distribution": "APP_STORE",
+  "primaryLocale": "en-US",
+  "locales": ["en-US", "fr-FR"],
+  "primaryCategory": "UTILITIES",
+  "secondaryCategory": "PRODUCTIVITY",
+  "pricing": {
+    "model": "PAID_UPFRONT",
+    "targetEUR": 9.99,
+    "subscription": false,
+    "inAppPurchases": false,
+    "advertising": false
+  },
+  "contentRightsThirdParty": false,
+  "usesEncryption": false,
+  "usesTracking": false,
+  "requiresAccount": false,
+  "privacyAnswer": "DATA_NOT_COLLECTED",
+  "marketingUrl": "https://operatorx-pullpath-ar.vercel.app/",
+  "supportUrl": "https://operatorx-pullpath-ar.vercel.app/support",
+  "privacyPolicyUrl": "https://operatorx-pullpath-ar.vercel.app/privacy",
+  "termsUrl": "https://operatorx-pullpath-ar.vercel.app/terms"
+}

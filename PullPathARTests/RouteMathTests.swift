@@ -56,4 +56,17 @@ final class RouteMathTests: XCTestCase {
         XCTAssertEqual(shortage.remainingMeters, 0, accuracy: 0.000_001)
         XCTAssertEqual(shortage.shortageMeters, 20, accuracy: 0.000_001)
     }
+    func testGeometrySummaryUsesThreeDimensionalRoute() {
+        let points = [
+            RouteVector3(x: 0, y: 0, z: 0),
+            RouteVector3(x: 3, y: 4, z: 0),
+            RouteVector3(x: 3, y: 1, z: 4)
+        ]
+        let summary = RouteMath.geometrySummary(points: points)
+        XCTAssertEqual(summary.horizontalTravelMeters, 7, accuracy: 0.000_001)
+        XCTAssertEqual(summary.verticalTravelMeters, 7, accuracy: 0.000_001)
+        XCTAssertEqual(summary.elevationRangeMeters, 4, accuracy: 0.000_001)
+        XCTAssertEqual(summary.straightLineMeters, Double(26).squareRoot(), accuracy: 0.000_001)
+    }
+
 }

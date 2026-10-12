@@ -1,0 +1,19 @@
+{
+  "bundleId": "com.operatorx.pullpathar",
+  "version": "1.0.0",
+  "buildNumber": "1",
+  "locale": "fr-FR",
+  "name": "PullPath AR",
+  "subtitle": "Tracé câble & bobines",
+  "promotionalText": "Tracez le chemin réel en AR, ajoutez la réserve, vérifiez vos bobines et exportez une fiche de tirage prête pour le chantier.",
+  "description": "PullPath AR est un outil terrain pour les installateurs qui veulent transformer un chemin de câble réel en tracé documenté et lié au matériel disponible.\n\nTracez un parcours point par point avec ARKit, ou utilisez la mesure manuelle lorsque l’AR n’est pas adaptée. PullPath AR calcule la longueur mesurée, ajoute une réserve fixe et un pourcentage de mou, puis affiche le besoin total avant le tirage.\n\nCréez vos profils de câble et suivez les bobines actives avec leur longueur restante. Affectez une bobine à un tracé et voyez immédiatement si elle couvre le besoin calculé.\n\nDocumentez chaque tracé avec des photos de chantier, des points modifiables, des notes, un statut et un historique local. Une fois le parcours prêt, exportez une fiche de tirage PDF avec les informations projet, les longueurs par segment, la réserve, le besoin total et la bobine affectée.\n\nFonctionnalités principales :\n• Tracé AR avec points 3D et segments visibles\n• Profil 3D : déplacement horizontal/vertical, amplitude d’altitude et distance entre extrémités\n• Mesure manuelle lorsque l’AR n’est pas disponible ou appropriée\n• Réserve fixe et pourcentage de mou\n• Profils de câble et inventaire de bobines\n• Vérification longueur disponible / manque avant tirage\n• Organisation par projet, chantier et client\n• Statut du tracé et historique local\n• Photos de chantier\n• Export PDF de la fiche de tirage\n• Unités métriques et impériales\n• Stockage local sans compte obligatoire\n• Aucune publicité et aucun SDK d’analytics tiers\n\nLes mesures sont des estimations de préparation. Vérifiez les dimensions et les conditions du chantier avec les méthodes exigées par votre métier avant commande, coupe ou installation du matériel.",
+  "keywords": "câble,tracé,AR,bobine,installateur,tirage,réseau,mesure,chantier,métré",
+  "marketingUrl": "https://operatorx-pullpath-ar.vercel.app/",
+  "supportUrl": "https://operatorx-pullpath-ar.vercel.app/support",
+  "privacyPolicyUrl": "https://operatorx-pullpath-ar.vercel.app/privacy",
+  "termsUrl": "https://operatorx-pullpath-ar.vercel.app/terms",
+  "primaryCategory": "UTILITIES",
+  "secondaryCategory": "PRODUCTIVITY",
+  "priceTargetEUR": 9.99,
+  "pricingModel": "paid-upfront-no-iap-no-ads"
+}
