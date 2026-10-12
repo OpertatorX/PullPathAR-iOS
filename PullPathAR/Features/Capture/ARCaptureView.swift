@@ -37,6 +37,7 @@ struct ARRouteCaptureView: UIViewRepresentable {
         uiView.session.pause()
     }
 
+    @MainActor
     final class Coordinator: NSObject {
         var parent: ARRouteCaptureView
         private var renderedPoints: [RouteVector3] = []
