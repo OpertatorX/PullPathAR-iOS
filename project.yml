@@ -16,13 +16,6 @@ targets:
     deploymentTarget: "17.0"
     sources:
       - path: PullPathAR
-        excludes:
-          - Resources
-    resources:
-      - path: PullPathAR/Resources/Assets.xcassets
-      - path: PullPathAR/Resources/PrivacyInfo.xcprivacy
-      - path: PullPathAR/Resources/en.lproj
-      - path: PullPathAR/Resources/fr.lproj
     settings:
       base:
         INFOPLIST_FILE: PullPathAR/Resources/Info.plist
