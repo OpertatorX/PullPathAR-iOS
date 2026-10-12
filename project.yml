@@ -19,11 +19,13 @@ targets:
         excludes:
           - Resources
     resources:
-      - path: PullPathAR/Resources
-    info:
-      path: PullPathAR/Resources/Info.plist
+      - path: PullPathAR/Resources/Assets.xcassets
+      - path: PullPathAR/Resources/PrivacyInfo.xcprivacy
+      - path: PullPathAR/Resources/en.lproj
+      - path: PullPathAR/Resources/fr.lproj
     settings:
       base:
+        INFOPLIST_FILE: PullPathAR/Resources/Info.plist
         PRODUCT_BUNDLE_IDENTIFIER: com.operatorx.pullpathar
         PRODUCT_NAME: PullPathAR
         MARKETING_VERSION: 1.0.0

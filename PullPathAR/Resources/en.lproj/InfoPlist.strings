@@ -1,0 +1,4 @@
+"CFBundleDisplayName" = "PullPath AR";
+"NSCameraUsageDescription" = "PullPath AR uses the camera to place route points in augmented reality and document cable paths.";
+"NSPhotoLibraryUsageDescription" = "PullPath AR lets you attach selected site photos to cable routes.";
+"NSPhotoLibraryAddUsageDescription" = "PullPath AR can save exported route documents and images when you choose to do so.";

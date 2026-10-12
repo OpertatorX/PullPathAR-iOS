@@ -1,0 +1,4 @@
+"CFBundleDisplayName" = "PullPath AR";
+"NSCameraUsageDescription" = "PullPath AR utilise la caméra pour placer les points du tracé en réalité augmentée et documenter les chemins de câble.";
+"NSPhotoLibraryUsageDescription" = "PullPath AR vous permet d’ajouter les photos de chantier que vous sélectionnez aux tracés de câble.";
+"NSPhotoLibraryAddUsageDescription" = "PullPath AR peut enregistrer les documents et images exportés lorsque vous choisissez de le faire.";
