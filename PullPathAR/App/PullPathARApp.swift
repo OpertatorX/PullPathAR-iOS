@@ -25,6 +25,7 @@ struct PullPathARApp: App {
     var body: some Scene {
         WindowGroup {
             RootView()
+                .tint(Color(red: 0.94, green: 0.54, blue: 0.22))
         }
         .modelContainer(modelContainer)
     }

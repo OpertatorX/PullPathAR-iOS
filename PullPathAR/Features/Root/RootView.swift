@@ -36,6 +36,31 @@ private struct AppSettingsView: View {
     var body: some View {
         NavigationStack {
             Form {
+                Section {
+                    HStack(spacing: 16) {
+                        Image("BrandMark")
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 68, height: 68)
+                            .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+                            .overlay {
+                                RoundedRectangle(cornerRadius: 16, style: .continuous)
+                                    .stroke(.white.opacity(0.10), lineWidth: 1)
+                            }
+                            .shadow(color: .black.opacity(0.18), radius: 10, y: 6)
+
+                        VStack(alignment: .leading, spacing: 5) {
+                            Text("PullPath AR")
+                                .font(.title3.weight(.semibold))
+                            Text("brand.tagline")
+                                .font(.subheadline)
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+                    .padding(.vertical, 8)
+                }
+                .listRowBackground(Color.clear)
+
                 Section("settings.measurement") {
                     Picker("settings.units", selection: $preferredUnitSystemRaw) {
                         Text("units.metric").tag(UnitSystem.metric.rawValue)
